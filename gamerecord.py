@@ -61,7 +61,7 @@ class GameRecord:
         the number of times that victory was accomplished"""
         victory = self.games[game_id].victories[victory_id]
 
-        self.players[player_id].add_victory(game_id, victory_id, victory.score)
+        self.players[player_id].add_victory(game_id, victory_id, victory.points)
         self.games[game_id].victories[victory_id].add_player(player_id)
         self.games[game_id].victories[victory_id].times_accomplished += 1
 
@@ -134,7 +134,7 @@ class GameRecord:
 
         for friend_id in player.friends:
             friend = self.players[friend_id]
-            pt.add_row([friend.name, player.gamerscore])
+            pt.add_row([friend.name, friend.gamerscore])
         print(pt)
         
         #Games Table

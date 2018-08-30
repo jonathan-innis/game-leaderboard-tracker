@@ -67,4 +67,7 @@ class Player:
         """Gets the total score of all the victories that the player has achieved
         in that particular game"""
 
-        return self.scores[game_id]
+        if game_id in self.scores.keys():
+            return self.scores[game_id]
+
+        return 0
