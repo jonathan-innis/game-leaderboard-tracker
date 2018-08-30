@@ -1,0 +1,195 @@
+AddGame 4001 "Mirror's Edge"
+
+AddGame 4002 "Dark Souls"
+
+AddGame 4003 "Dishonored"
+
+AddGame 4004 "Deadlight"
+
+AddGame 4005 "League of Legends"
+
+ 
+
+AddVictory 4001 901 "Access all areas" 20
+
+AddVictory 4001 902 "Tango down" 15
+
+AddVictory 4001 903 "Mine!" 15
+
+AddVictory 4001 904 "Packrat" 80
+
+AddVictory 4001 905 "Tango down" 20
+
+AddVictory 4001 906 "Pro runner" 50
+
+AddVictory 4001 907 "Crystal Weapon" 15
+
+ 
+
+AddVictory 4002 801 "Prayer of a Maiden" 25
+
+AddVictory 4002 802 "Dark Lord" 90
+
+ 
+
+AddVictory 4003 701 "Faceless" 20
+
+AddVictory 4003 702 "Resolution" 100
+
+AddVictory 4003 703 "Surgical" 30
+
+AddVictory 4003 704 "Tempest" 20
+
+ 
+
+AddVictory 4004 601 "Go back to hell" 10
+
+AddVictory 4004 602 "I want it all" 30
+
+ 
+
+AddVictory 4005 501 "Double kill" 20
+
+AddVictory 4005 502 "Penta kill" 50
+
+ 
+
+AddPlayer 40001 "Bill Hamilton"
+
+AddPlayer 40002 "Andruid Kerne"
+
+AddPlayer 40003 "Andrew Webb"
+
+AddPlayer 40004 "Nic Lupfer"
+
+AddPlayer 40005 "Lennart Nacke"
+
+ 
+
+AddFriends 40001 40002
+
+AddFriends 40001 40003
+
+AddFriends 40001 40004
+
+AddFriends 40001 40005
+
+AddFriends 40002 40003
+
+AddFriends 40002 40004
+
+AddFriends 40004 40005
+
+ 
+
+Plays 40001 4001 "FaithRunner1337"
+
+Plays 40001 4002 "AmazingAchievosAhead"
+
+Plays 40001 4003 "Splinez"
+
+Plays 40001 4004 "ApocalypticJumper666"
+
+Plays 40001 4005 "Splinez"
+
+Plays 40002 4001 "andruid"
+
+Plays 40002 4002 "andruid"
+
+Plays 40002 4003 "andruid"
+
+Plays 40002 4004 "andruid"
+
+Plays 40002 4005 "andruid"
+
+Plays 40003 4001 "amw"
+
+Plays 40003 4002 "messi"
+
+Plays 40003 4003 "kaka"
+
+Plays 40003 4004 "foobar"
+
+Plays 40003 4005 "no9"
+
+Plays 40004 4001 "thenic"
+
+Plays 40004 4002 "omgnic"
+
+Plays 40004 4003 "thenic"
+
+Plays 40004 4004 "omgnic"
+
+Plays 40004 4005 "nic"
+
+ 
+
+WinVictory 40001 4001 901
+
+WinVictory 40001 4001 902
+
+WinVictory 40001 4001 903
+
+WinVictory 40001 4001 904
+
+WinVictory 40001 4001 905
+
+WinVictory 40001 4001 906
+
+WinVictory 40001 4001 907
+
+WinVictory 40001 4002 801
+
+WinVictory 40001 4002 802
+
+WinVictory 40001 4003 701
+
+WinVictory 40001 4003 702
+
+WinVictory 40001 4004 601
+
+ 
+
+WinVictory 40002 4001 901
+
+WinVictory 40002 4002 801
+
+WinVictory 40002 4003 701
+
+WinVictory 40002 4004 601
+
+ 
+
+WinVictory 40003 4001 901
+
+WinVictory 40003 4001 902
+
+WinVictory 40003 4002 801
+
+WinVictory 40003 4002 802
+
+WinVictory 40003 4003 701
+
+WinVictory 40003 4003 702
+
+WinVictory 40003 4004 601
+
+WinVictory 40003 4004 602
+
+ 
+
+WinVictory 40004 4001 901
+
+WinVictory 40004 4002 801
+
+WinVictory 40004 4003 702
+
+WinVictory 40004 4004 601
+
+WinVictory 40004 4005 501
+
+WinVictory 40004 4005 502
+
+ 
+
+SummarizePlayer 40001

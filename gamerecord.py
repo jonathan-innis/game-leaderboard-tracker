@@ -10,7 +10,7 @@ class GameRecord:
         total_score = 0
 
         for game_id in player.plays.keys():
-            game = games[game_id]
+            game = self.games[game_id]
             total_score += player.get_score(game, game_id)
         return total_score
             
@@ -49,9 +49,19 @@ class GameRecord:
         player = self.players[player_id]
         game = self.games[game_id]
 
+        print()
+        print("Player: " + player.name)
+        print("Game: " + game.name)
+        print()
+
+        pt = PrettyTable()
+        pt.field_names = ["Friend", "Gamerscore"]
         for friend_id in player.friends:
             if friend_id in game.self.players:
-                print ("Hi") #will update this to have actual output later
+                friend = self.players[friend_id]
+                pt.add_row([friend.name, friend.get_gamer_score(game, game_id)])
+        
+        print(pt)
 
     def compare_players(self, player_id_1, player_id_2, game_id):
         player_1 = self.players[player_id_1]
@@ -77,14 +87,15 @@ class GameRecord:
         pt.field_names = ["Friend", "Gamerscore"]
         for friend_id in player.friends:
             friend = self.players[friend_id]
-            pt.add_row([friend.name, friend.get_])
+            pt.add_row([friend.name, self.get_gamer_score(friend)])
         print(pt)
         
         pt = PrettyTable()
         pt.field_names = ["Game", "Victories", "Gamerscore", "IGN"]
         for game_id in player.plays.keys():
             game = self.games[game_id]
-            pt.add_row([game.name, 20, player.get_score(game, game_id), player.plays[game_id]])
+            victory_percentage = str(len(player.get_victories(game_id))) + "/" + str(len(game.victories.keys()))
+            pt.add_row([game.name, victory_percentage, player.get_score(game, game_id), player.plays[game_id]])
         print(pt)
         
         total_game_score = 0
@@ -95,29 +106,51 @@ class GameRecord:
 
     def summarize_game(self, game_id):
         game = self.games[game_id]
-        for player_id in game.self.players:
-            print(self.players[player_id])
 
+        pt = PrettyTable()
+        pt.field_names = ["Player", "Gamerscore", "IGN"]
+        for player_id in game.players:
+            player = self.players[player_id]
+            pt.add_row([player.name, player.get_gamer_score(game, game_id), player.plays[game_id]])
+        
+        print(pt)
+
+        pt = PrettyTable()
+        pt.field_names = ["Victory", "Times Accomplished", "Points"]
         for victory_id in game.victories.keys():
-            print(game.victories[victory_id])
+            victory = game.victories[victory_id]
+            pt.add_row([victory.name, victory.times_accomplished, victory.points])
+        
+        print(pt)
+            
 
     def summarize_victory(self, game_id, victory_id):
         game = self.games[game_id]
 
-        num_total_self.players = len(game.self.players)
+        num_total_players = len(game.players)
         num_victories = game.victories[victory_id].times_accomplished
 
-        for player_id in game.self.players:
+
+        pt = PrettyTable()
+        pt.field_names = ["Player", "Gamerscore", "IGN"]
+        for player_id in game.players:
             player = self.players[player_id]
             victories = player.get_victories(game_id)
             if victory_id in victories:
-                print(player)
+                pt.add_row([player.name, player.get_gamer_score(game, game_id), player.plays[game_id]])
+        print(pt)
         
-        print(num_total_self.players)
-        print(num_victories)
+        if num_total_players  == 0:
+            print (0)
+        else:
+            print(num_victories / num_total_players)
 
     def victory_ranking(self):
         ranking = {}
+
+        pt = PrettyTable()
+        pt.field_names = ["Player", "Gamerscore"]
+
         for player in self.players.values():
             total_game_score = 0
             for game_id in player.victories.keys():
@@ -127,4 +160,11 @@ class GameRecord:
 
             ranking[player.id] = total_game_score
         
-        print(sorted(ranking.items(), key=lambda x:x[1]))
+        sorted_ranking = sorted(ranking.items(), key=lambda x:x[1], reverse=True)
+
+        for rank in sorted_ranking:
+            player = self.players[rank[0]]
+            pt.add_row([player.name, rank[1]])
+        
+        print(pt)
+

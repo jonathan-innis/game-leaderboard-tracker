@@ -2,7 +2,6 @@ class Player:
     def __init__(self, id, name):
         self.id = id
         self.name = name
-        self.game_names = {}
         self.plays = {}
         self.friends = []
         self.victories = {}
@@ -27,7 +26,7 @@ class Player:
     
     def get_score(self, game, game_id):
         game_score = 0
-        for victory_id in self.victories[game_id]:
+        for victory_id in self.get_victories(game_id):
             game_score += game.victories[victory_id].points
 
         return game_score
