@@ -1,5 +1,8 @@
 from prettytable import PrettyTable
-import helper
+from classes import Game
+from classes import Player
+from classes import Victory
+
 
 class GameRecord:
     """Records of all of the gaming relationships
@@ -22,17 +25,17 @@ class GameRecord:
     def add_player(self, player_id, player_name):
         """Adds player to the players dictionary"""
 
-        self.players[player_id] = helper.Player(player_id, player_name)
+        self.players[player_id] = Player(player_id, player_name)
     
     def add_game(self, game_id, game_name):
         """Adds game to the games dictionary"""
 
-        self.games[game_id] = helper.Game(game_id, game_name)
+        self.games[game_id] = Game(game_id, game_name)
     
     def add_victory(self, victory_id, game_id, victory_name, victory_points):
         """Adds victory to the victory dictionary inside of the game object"""
 
-        victory = helper.Victory(victory_id, game_id, victory_name, victory_points)
+        victory = Victory(victory_id, game_id, victory_name, victory_points)
         self.games[game_id].add_victory(victory_id, victory)
 
     #----------------------------------------------------------------------------------------
