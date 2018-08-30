@@ -16,16 +16,6 @@ class GameRecord:
         """Inits GameRecord with no players and no games"""
         self.players = {}
         self.games = {}
-
-    def get_gamer_score(self, player):
-        """Fetches the gamerscore of a player given the player object"""
-
-        total_score = 0
-
-        for game_id in player.plays.keys():
-            game = self.games[game_id]
-            total_score += player.get_score(game, game_id)
-        return total_score
             
     # These functions add items to the record and create new classes
 
@@ -66,8 +56,9 @@ class GameRecord:
         """Adds the victory to the specified game to the player's victory dictionary, 
         adds the player_id to the list of players who achieved the victory, and increasing
         the number of times that victory was accomplished"""
+        victory = self.games[game_id].victories[victory_id]
 
-        self.players[player_id].add_victory(game_id, victory_id)
+        self.players[player_id].add_victory(game_id, victory_id, victory.score)
         self.games[game_id].victories[victory_id].add_player(player_id)
         self.games[game_id].victories[victory_id].times_accomplished += 1
 
@@ -91,7 +82,7 @@ class GameRecord:
         for friend_id in player.friends:
             if friend_id in game.self.players:
                 friend = self.players[friend_id]
-                pt.add_row([friend.name, friend.get_gamer_score(game, game_id)])
+                pt.add_row([friend.name, friend.gamerscore])
         
         print(pt)
 
@@ -117,9 +108,9 @@ class GameRecord:
         pt.field_names = ["Player", "Victory Record", "Total Points"]
 
         victory_percentage = str(len(player_1_victory_ids)) + "/" + str(len(game.victories.keys())) 
-        pt.add_row([player_1.name, victory_percentage, player_1.get_score(game, game_id)])
+        pt.add_row([player_1.name, victory_percentage, player_1.get_score(game_id)])
         victory_percentage = str(len(player_2_victory_ids)) + "/" + str(len(game.victories.keys()))
-        pt.add_row([player_2.name, victory_percentage, player_2.get_score(game, game_id)])
+        pt.add_row([player_2.name, victory_percentage, player_2.get_score(game_id)])
 
         print(pt)
 
@@ -128,9 +119,10 @@ class GameRecord:
          player plays, and gamer point totals."""
 
         player = self.players[player_id]
+
         print()
         print("Player: " + player.name)
-        print("Total Gamescore: " + str(self.get_gamer_score(player)))
+        print("Total Gamescore: " + str(player.gamerscore))
         print()
 
         #Friend Table
@@ -139,7 +131,7 @@ class GameRecord:
 
         for friend_id in player.friends:
             friend = self.players[friend_id]
-            pt.add_row([friend.name, self.get_gamer_score(friend)])
+            pt.add_row([friend.name, player.gamerscore])
         print(pt)
         
         #Games Table
@@ -149,15 +141,8 @@ class GameRecord:
         for game_id in player.plays.keys():
             game = self.games[game_id]
             victory_percentage = str(len(player.get_victories(game_id))) + "/" + str(len(game.victories.keys()))
-            pt.add_row([game.name, victory_percentage, player.get_score(game, game_id), player.plays[game_id]])
+            pt.add_row([game.name, victory_percentage, player.get_score(game_id), player.plays[game_id]])
         print(pt)
-        
-        #Getting the total game score
-        total_game_score = 0
-        for game_id in player.victories.keys():
-            game = self.games[game_id]
-            game_score = player.get_score(game, game_id)
-            total_game_score += game_score
 
     def summarize_game(self, game_id):
         """Creates a report of all players who play the specified game and the 
@@ -170,7 +155,7 @@ class GameRecord:
         pt.field_names = ["Player", "Gamerscore", "IGN"]
         for player_id in game.players:
             player = self.players[player_id]
-            pt.add_row([player.name, player.get_gamer_score(game, game_id), player.plays[game_id]])
+            pt.add_row([player.name, player.gamerscore, player.plays[game_id]])
         
         print(pt)
 
@@ -202,10 +187,10 @@ class GameRecord:
             player = self.players[player_id]
             victories = player.get_victories(game_id)
             if victory_id in victories:
-                pt.add_row([player.name, player.get_gamer_score(game, game_id), player.plays[game_id]])
+                pt.add_row([player.name, player.gamerscore, player.plays[game_id]])
         print(pt)
         
-        print ("Victory Achieved: " + num_victories + "/" + num_total_players)
+        print("Victory Achieved: " + num_victories + "/" + num_total_players)
 
     def victory_ranking(self):
         """Creates a report showing the summary ranking all players by their total number of gamer points"""
@@ -216,14 +201,9 @@ class GameRecord:
         pt.field_names = ["Player", "Gamerscore"]
 
         #Gets the gamerscore for each player and orders them based on highest to lowest gamerscore
-        for player in self.players.values():
-            total_game_score = 0
-            for game_id in player.victories.keys():
-                game = self.games[game_id]
-                game_score = player.get_score(game, game_id)
-                total_game_score += game_score
-
-            ranking[player.id] = total_game_score
+        for player_id in self.players.values():
+            player = self.players[player_id]
+            ranking[player.id] = player.gamerscore
         
         #Returns a descending sorted list of tuples by gamerscore in the format (player_id, gamerscore)
         sorted_ranking = sorted(ranking.items(), key=lambda x:x[1], reverse=True)
