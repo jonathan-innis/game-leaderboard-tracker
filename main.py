@@ -1,9 +1,9 @@
-from gamerecord import *
+import gamerecord
 import shlex
 import sys
 
 def main():
-    record = GameRecord()
+    record = gamerecord.GameRecord()
 
     for line in sys.stdin:
         line = shlex.split(line)

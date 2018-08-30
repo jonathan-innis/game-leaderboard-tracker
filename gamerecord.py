@@ -1,5 +1,5 @@
 from prettytable import PrettyTable
-from helper import *
+import helper
 
 class GameRecord:
     def __init__(self):
@@ -17,13 +17,13 @@ class GameRecord:
     # These functions add items to the record and create new classes
 
     def add_player(self, player_id, player_name):
-        self.players[player_id] = Player(player_id, player_name)
+        self.players[player_id] = helper.Player(player_id, player_name)
     
     def add_game(self, game_id, game_name):
-        self.games[game_id] = Game(game_id, game_name)
+        self.games[game_id] = helper.Game(game_id, game_name)
     
     def add_victory(self, victory_id, game_id, victory_name, victory_points):
-        victory = Victory(victory_id, game_id, victory_name, victory_points)
+        victory = helper.Victory(victory_id, game_id, victory_name, victory_points)
         self.games[game_id].add_victory(victory_id, victory)
 
     #----------------------------------------------------------------------------------------
