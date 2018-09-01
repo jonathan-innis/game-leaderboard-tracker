@@ -79,17 +79,16 @@ class GameRecord:
         print()
 
         pt = PrettyTable()
-        pt.field_names = ["Friend", "Gamerscore"]
+        pt.field_names = ["Friend", "IGN", "Gamerscore"]
 
         #Checks if the friend in the list of friends has played the given game
         for friend_id in player.friends:
-            if friend_id in game.self.players:
+            if friend_id in game.players:
                 friend = self.players[friend_id]
-                pt.add_row([friend.name, friend.gamerscore])
+                pt.add_row([friend.name, friend.plays[game_id], friend.gamerscore])
         
         print(pt)
 
-    #TODO finish this function!!!
     def compare_players(self, player_id_1, player_id_2, game_id):
         """Creates a report comparing player 1 and player 2's Victory 
         records and total Victory scores for the given game"""
@@ -153,6 +152,10 @@ class GameRecord:
 
         game = self.games[game_id]
 
+        print()
+        print("Game: " + game.name)
+        print()
+
         #Player Table
         pt = PrettyTable()
         pt.field_names = ["Player", "Gamerscore", "IGN"]
@@ -193,7 +196,7 @@ class GameRecord:
                 pt.add_row([player.name, player.gamerscore, player.plays[game_id]])
         print(pt)
         
-        print("Victory Achieved: " + num_victories + "/" + num_total_players)
+        print("Victory Achieved: " + str(num_victories) + "/" + str(num_total_players))
 
     def victory_ranking(self):
         """Creates a report showing the summary ranking all players by their total number of gamer points"""
@@ -204,8 +207,7 @@ class GameRecord:
         pt.field_names = ["Player", "Gamerscore"]
 
         #Gets the gamerscore for each player and orders them based on highest to lowest gamerscore
-        for player_id in self.players.values():
-            player = self.players[player_id]
+        for player in self.players.values():
             ranking[player.id] = player.gamerscore
         
         #Returns a descending sorted list of tuples by gamerscore in the format (player_id, gamerscore)

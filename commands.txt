@@ -193,3 +193,17 @@ WinVictory 40004 4005 502
  
 
 SummarizePlayer 40001
+
+VictoryRanking
+
+SummarizeGame 4001
+
+SummarizeGame 4003
+
+SummarizeVictory 4005 501
+
+SummarizeVictory 4003 701
+
+FriendsWhoPlay 40001 4001
+
+ComparePlayers 40001 40002 4001
