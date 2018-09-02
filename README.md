@@ -3,7 +3,7 @@
 ## Quickstart
 All libraries must be downloaded in order to run the program so run:
 
-    pip install -r requirements.txt
+    pip3 install -r requirements.txt
 To start the program from standard out, running it indefinetely run:
     
     python3 main.py
