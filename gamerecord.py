@@ -180,9 +180,13 @@ class GameRecord:
         percentage of players who play that game who have the Victory"""
 
         game = self.games[game_id]
+        victory = game.victories[victory_id]
 
         num_total_players = len(game.players)
         num_victories = game.victories[victory_id].times_accomplished
+
+        print()
+        print("Victory: '" + victory.name + "'")
 
         #Player Table
         pt = PrettyTable()
@@ -204,7 +208,7 @@ class GameRecord:
         ranking = {}
 
         pt = PrettyTable()
-        pt.field_names = ["Player", "Gamerscore"]
+        pt.field_names = ["Rank", "Player", "Gamerscore"]
 
         #Gets the gamerscore for each player and orders them based on highest to lowest gamerscore
         for player in self.players.values():
@@ -213,9 +217,12 @@ class GameRecord:
         #Returns a descending sorted list of tuples by gamerscore in the format (player_id, gamerscore)
         sorted_ranking = sorted(ranking.items(), key=lambda x:x[1], reverse=True)
 
+
+        i = 1
         for rank in sorted_ranking:
             player = self.players[rank[0]]
-            pt.add_row([player.name, rank[1]])
+            pt.add_row([i, player.name, rank[1]])
+            i += 1
         
         print(pt)
 

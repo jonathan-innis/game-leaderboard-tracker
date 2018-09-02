@@ -1,1 +1,1 @@
-PrettyTable==7
+prettytable==0.7.2
