@@ -6,12 +6,13 @@ def main():
     record = GameRecord()
 
     for line in sys.stdin:
-        line = shlex.split(line)
+        line = shlex.split(line) #Splits line into array at every whitespace unless enclosed in double quotes
         if len(line) == 0 or line[0] == '':
             continue
 
         function_type = line[0]
 
+        #Identifying the function type, pulling the appropriate data, and doing data type conversion
         try:
             if function_type == 'AddPlayer':
                 if len(line) < 3:
