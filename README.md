@@ -6,7 +6,7 @@ You will create an application for keeping track of video game players, what gam
 ## Quickstart
 All libraries must be downloaded in order to run the program so run:
 
-    pip3 install -r requirements.txt
+    python3.6 -m pip install prettytable --user
 To start the program from standard out, running it indefinetely run:
     
     python3 main.py
