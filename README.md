@@ -9,7 +9,7 @@ All libraries must be downloaded in order to run the program so run:
     python3.6 -m pip install prettytable --user
 To start the program from standard out, running it indefinetely run:
     
-    python3 main.py
+    python3.6 main.py
 Optionally, you can run the program by piping in input with:
     
-    python3 main.py < commands.txt
+    python3.6 main.py < commands.txt
